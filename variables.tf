@@ -27,11 +27,6 @@ variable "db_password" {
   sensitive = true
 }
 
-variable "eks_security_group_name" {
-  type    = string
-  default = "autocenter-fiap-infraestrutura-sg"
-}
-
 variable "private_subnet_cidrs" {
   type    = list(string)
   default = ["10.0.48.0/20", "10.0.64.0/20"]
