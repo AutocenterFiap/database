@@ -10,3 +10,8 @@ output "rds_endpoint" {
 output "rds_port" {
   value = aws_db_instance.mysql.port
 }
+
+output "rds_security_group_id" {
+  description = "ID do Security Group do RDS MySQL"
+  value       = aws_security_group.rds_mysql.id
+}
