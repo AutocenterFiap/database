@@ -15,3 +15,9 @@ output "rds_security_group_id" {
   description = "ID do Security Group do RDS MySQL"
   value       = aws_security_group.rds_mysql.id
 }
+
+output "db_user" {
+  description = "Usuário administrativo do RDS MySQL"
+  value       = var.db_username
+  sensitive   = true
+}
