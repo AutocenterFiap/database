@@ -5,6 +5,8 @@ cria sub-redes privadas, o grupo de segurança do banco e uma instância RDS.
 
 ## Arquitetura
 
+![Diagrama de arquitetura](./arquitetura.drawio.png)
+
 O desenho em [arquitetura.drawio](./arquitetura.drawio) mostra os recursos deste
 diretório e sua relação com a infraestrutura compartilhada.
 
@@ -91,8 +93,22 @@ recursos e aprove o apply somente após a revisão humana do plano.
 
 ## Saídas
 
-| Output | Observação |
-| --- | --- |
-| `rds_identifier` | Identificador da instância RDS. |
-| `rds_endpoint` | Endpoint do banco; marcado como sensível. |
-| `rds_port` | Porta MySQL configurada. |
+| Output | Sensível | Observação |
+| --- | --- | --- |
+| `rds_identifier` | Não | Identificador da instância RDS. |
+| `rds_endpoint` | Sim | Endpoint do banco. |
+| `rds_port` | Não | Porta MySQL configurada. |
+| `rds_security_group_id` | Não | ID do security group do RDS MySQL. |
+| `db_user` | Sim | Usuário administrativo do RDS MySQL. |
+
+## CI/CD
+
+Este repositório usa GitHub Actions. O workflow executa `terraform fmt -check` e
+`terraform validate` em todo pull request aberto contra as branches `main` e
+`develop`. O apply é realizado exclusivamente pelo Terraform Cloud após revisão
+humana do plano.
+
+**Regras de proteção de branch:**
+
+- `main` e `develop` têm push direto bloqueado;
+- todo merge exige aprovação por pull request.
